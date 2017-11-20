@@ -1,4 +1,5 @@
-a + b = c
+c = a + b
+e = c + a
 if
 then
 else
@@ -6,3 +7,4 @@ else
 
 "999string123"
 //comment
+/*kuy*/
