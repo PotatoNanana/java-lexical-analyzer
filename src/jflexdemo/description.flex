@@ -1,16 +1,22 @@
 package jflexdemo; 
- 
+import java.util.ArrayList;
  
 %% 
  
 %public 
 %class Lexer 
 %type Void 
+
+
+%{
+	 private ArrayList<String> list= new ArrayList();
+%}
+
  
 %init{ 
     yybegin( FIRST ); 
-%init} 
- 
+%init}
+
 keyword = "if" | "then" |"else"| "endif" |"while" |"do"| "endwhile" |"print" |"newline"| "read"
 operator = "+" | "-" |"*"| "/"| "="| ">" |">="| "<"| "<="| "==" |"++"| "--"
 integer = [0-9][0-9]*
@@ -19,37 +25,37 @@ string = [\"][A-Za-z0-9][A-Za-z0-9]*[\"]
 comment = "//"[A-Za-z0-9][A-Za-z0-9]*
 endPunct    =  [\;] 
 otherPunct  =  [\(\)] 
-space    =  [\ \t\r\n] 
+space    =  [\ \t]
+LineTerminator = \r|\n|\r\n
  
 %state FIRST
  
 %% 
 <FIRST> { 
   
-  {operator}    { 
+  {operator}	{ 
 		System.out.println( "operator\t" + yytext()  ); 
 		}
-  {keyword}    { 
+  {keyword}	{ 
 		System.out.println( "keyword\t" + yytext()  ); 
 		} 
-  {word}
-		{ 
+  {word}	{ 
 		System.out.println( "identifier\t" + yytext() ); 
 		} 
-  {endPunct}    { 
+  {endPunct}	{ 
 		System.out.println( "endPunct\t" + yytext()  ); 
 		}
-  {string}	 { 
+  {string}	{ 
 			System.out.println( "string\t" + yytext()  ); 
 		}
-  {comment}       { 
+  {comment}	{ 
 		System.out.println( "comment\t" + yytext()  ); 
 		}
 
-  {space}   { } 
+  {space}	{ 
+  		} 
                
-   .     { 
-        System.err.println(  
-          "Invalid character \"" + yytext() + "\"" ); 
-        }
+   .	{ 
+        System.err.println( "Invalid character \"" + yytext() + "\"" ); 
+    }
 }
