@@ -23,7 +23,8 @@ integer = [0-9][0-9]*
 word  =  [A-Za-z][A-Za-z]*
 string = [\"][A-Za-z0-9][A-Za-z0-9]*[\"]
 LineTerminator = \r|\n|\r\n
-comment = "//"[A-Za-z0-9][A-Za-z0-9]*|"/*"+comment[LineTerminator]*+"*/"
+comment = "//"[A-Za-z0-9][A-Za-z0-9]*
+commentmanylines = "/*"[A-Za-z0-9][A-Za-z0-9]*[\r[A-Za-z0-9]*|\n[A-Za-z0-9]*|\r\n[A-Za-z0-9]*]*"*/"
 endPunct    =  [\;] 
 otherPunct  =  [\(\)] 
 space    =  [\ \t\r\n]
@@ -63,6 +64,9 @@ space    =  [\ \t\r\n]
 			System.out.println( "String :\t" + yytext()  ); 
 		}
   {comment}	{ 
+		System.out.println( "Comment :\t" + yytext()  ); 
+		}
+	{commentmanylines}	{ 
 		System.out.println( "Comment :\t" + yytext()  ); 
 		}
 
