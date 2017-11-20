@@ -18,7 +18,7 @@ public class Lexer {
   private static final int ZZ_BUFFERSIZE = 16384;
 
   /** lexical states */
-  public static final int YYINITIAL = 0;
+  
   public static final int FIRST = 2;
 
   /**
