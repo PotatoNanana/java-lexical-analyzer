@@ -17,13 +17,12 @@ import java.util.ArrayList;
     yybegin( FIRST ); 
 %init}
 
-character = [^\n]
 keyword = "if" | "then" |"else"| "endif" |"while" |"do"| "endwhile" |"print" |"newline"| "read"
 operator = "+" | "-" |"*"| "/"| "="| ">" |">="| "<"| "<="| "==" |"++"| "--"
 integer = \d+
 identifier  =  [A-Za-z][A-Za-z0-9]*
-string = \"{character}*\"
-comment = "//"{character}*
+string = \"[^\"\n]*\"
+comment = "//"[^n]*
 commentmanylines =  "/*"~"*/"
 semicolon    =  \;
 bracket  =  [\(\)] 
@@ -88,5 +87,6 @@ LineTerminator = \r|\n|\r\n
     .	
     { 
         System.err.println( "Invalid character \"" + yytext() + "\"" ); 
+        return null;
     }
 }
